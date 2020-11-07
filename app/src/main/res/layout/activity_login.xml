@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!--
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/loginback">
+
+        <EditText
+            android:id="@+id/loginusname"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="267dp"
+            android:layout_marginEnd="2dp"
+            android:drawableLeft="@drawable/ic_use"
+            android:ems="10"
+            android:hint="username"
+            android:inputType="textEmailAddress"
+            android:outlineAmbientShadowColor="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/loginpass"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="322dp"
+            android:layout_marginEnd="0dp"
+            android:drawableLeft="@drawable/ic_password"
+            android:ems="10"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
+
+        <Button
+            android:id="@+id/loginbutton"
+            android:layout_width="201dp"
+            android:layout_height="62dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="99dp"
+            android:layout_marginBottom="259dp"
+            android:background="@drawable/roundbutton"
+            android:backgroundTint="#FFFFFF"
+            android:foregroundTint="#441313"
+            android:outlineAmbientShadowColor="#FFFFFF"
+            android:outlineProvider="paddedBounds"
+            android:outlineSpotShadowColor="#FFFFFF"
+            android:shadowColor="#FC0000"
+            android:soundEffectsEnabled="true"
+            android:text="LOG IN"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/caccbutton"
+            android:layout_width="196dp"
+            android:layout_height="22dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginBottom="224dp"
+            android:background="@android:color/transparent"
+            android:text="create account"
+            android:textColor="#FFFFFF" />
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="116dp"
+            android:layout_height="110dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="126dp"
+            app:srcCompat="@mipmap/logo4_round" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

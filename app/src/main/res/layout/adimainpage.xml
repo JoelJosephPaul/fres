@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4A009688">
+
+    <Button
+        android:id="@+id/showbikebut"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="377dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="#ED212E5C"
+        android:fadingEdge="horizontal|vertical|none"
+        android:outlineAmbientShadowColor="#0056D5"
+        android:outlineProvider="none"
+        android:outlineSpotShadowColor="#00AEFF"
+        android:selectAllOnFocus="true"
+        android:shadowColor="#0000FF"
+        android:shadowDy="20"
+        android:shadowRadius="?attr/dialogCornerRadius"
+        android:soundEffectsEnabled="true"
+        android:text="MY BIKES"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        android:visibility="visible">
+
+    </Button>
+
+    <Button
+        android:id="@+id/addbikebut"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="376dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="#1E2B55"
+        android:text="ADD A BIKE"
+        android:textColor="#FFFFFF">
+
+    </Button>
+
+    <Button
+        android:id="@+id/rentbikebut"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="553dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="#1E3161"
+        android:text="RENT A BIKE"
+        android:textColor="#FFFFFF">
+
+    </Button>
+
+    <Button
+        android:id="@+id/historybut"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="551dp"
+        android:layout_marginEnd="52dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="#223668"
+        android:text="HISTORY"
+        android:textColor="#FFFFFF">
+
+    </Button>
+
+</RelativeLayout>

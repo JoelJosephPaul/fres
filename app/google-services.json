@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1067603080328",
+    "firebase_url": "https://fres-5c0c3.firebaseio.com",
+    "project_id": "fres-5c0c3",
+    "storage_bucket": "fres-5c0c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067603080328:android:a5e5edf44e116df28b9b3d",
+        "android_client_info": {
+          "package_name": "com.example.fres"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067603080328-tpk78jog4updsruf8c102mg2i3dbajr4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl7NpT1RerRrGVeVV-az0y5oZg2Wa_wWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067603080328-tpk78jog4updsruf8c102mg2i3dbajr4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
