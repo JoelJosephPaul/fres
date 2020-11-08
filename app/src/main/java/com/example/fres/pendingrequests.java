@@ -1,8 +1,11 @@
 package com.example.fres;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,14 +20,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class pendingrequests extends AppCompatActivity {
-    TextView listpendreq;
 
     ListView pendreqlistview;
 
-    DatabaseReference pendbikereff, bikereff;
+    DatabaseReference pendbikereff, bikereff,increqbikereff;
     ValueEventListener pendbikerefflistener;
     ArrayList<Bike> blist = new ArrayList<>();
-    String bname;
+    String bname,mname;
     Bike b;
 
     @Override
@@ -36,11 +38,11 @@ public class pendingrequests extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         final String u = bundle.getString("username");
 
-        listpendreq = findViewById(R.id.listpendreq);
         pendreqlistview = findViewById(R.id.pendreqlistview);
 
         bikereff = FirebaseDatabase.getInstance().getReference().child("Bikedata");
         pendbikereff = FirebaseDatabase.getInstance().getReference().child("pendingrequest").child(u);
+        increqbikereff = FirebaseDatabase.getInstance().getReference().child("incomingrequest");
         pendbikerefflistener = pendbikereff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -80,6 +82,37 @@ public class pendingrequests extends AppCompatActivity {
 
             }
         });
+
+        pendreqlistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                //bname = blist.get(position).getPassword();//bikid
+                //mname = incblist.get(position).getUsername();//username
+
+                //pendbikereff.child(mname).child(bname).removeValue();
+                //increqbikereff.child(bname).child(mname).removeValue();
+                bname = blist.get(position).getBikeid();
+                pendbikereff.child(bname).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        mname = dataSnapshot.getValue().toString();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+                pendbikereff.child(bname).removeValue();
+                increqbikereff.child(mname).child(bname).removeValue();
+
+
+                return false;
+            }
+        });
+
 
     }
 

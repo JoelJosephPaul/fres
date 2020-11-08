@@ -16,13 +16,6 @@
 
     </TextView>
 
-    <TextView
-        android:id="@+id/listpendreq"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </TextView>
-
     <ListView
         android:id="@+id/pendreqlistview"
         android:layout_width="match_parent"

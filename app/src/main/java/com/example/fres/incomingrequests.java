@@ -22,7 +22,6 @@ import java.util.Iterator;
 
 public class incomingrequests extends AppCompatActivity {
 
-    TextView listincreq;
     ListView increqlistview;
     DatabaseReference increqbikereff, pendbikereff, rentedreff, bikereff;
     ValueEventListener increqbikerefflistener;
@@ -39,7 +38,6 @@ public class incomingrequests extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         final String u = bundle.getString("username");
 
-        listincreq = findViewById(R.id.listincreq);
 
         increqlistview = findViewById(R.id.increqlistview);
 

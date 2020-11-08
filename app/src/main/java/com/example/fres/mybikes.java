@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class mybikes extends AppCompatActivity {
-
-    TextView listofbikes;
     TextView qqqq;
     ListView bikelistview;
 
@@ -35,8 +33,6 @@ public class mybikes extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         final String u = bundle.getString("username");
-
-        listofbikes=findViewById(R.id.listofbikes);
 
         bikelistview = findViewById(R.id.bikelistview);
 

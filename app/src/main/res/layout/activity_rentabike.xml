@@ -13,11 +13,7 @@
         android:text="Available ITEMS"
         android:textSize="20sp">
     </TextView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listrentabike">
-    </TextView>
+
     <ListView
         android:id="@+id/rentbikelistview"
         android:layout_width="match_parent"

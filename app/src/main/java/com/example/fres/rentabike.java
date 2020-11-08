@@ -20,7 +20,6 @@ import java.util.Iterator;
 
 public class rentabike extends AppCompatActivity {
     ListView rentbikelistview;
-    TextView listrentabike;
 
     DatabaseReference rentbikereff,temprentreff,dbref,dbref2,memref;
     ValueEventListener rentbikerefflistener;
@@ -35,7 +34,6 @@ public class rentabike extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         final String u = bundle.getString("username");
 
-        listrentabike = findViewById(R.id.listrentabike);
         rentbikelistview = findViewById(R.id.rentbikelistview);
 
         rentbikereff = FirebaseDatabase.getInstance().getReference().child("Bikedata");
@@ -115,7 +113,7 @@ public class rentabike extends AppCompatActivity {
                         b2.setAvail(Integer.parseInt(dataSnapshot.child("avail").getValue().toString()));
 
                         dbref.child(b2.getUsername()).child(b2.getBikeid()).child(u).setValue(m);
-                        dbref2.child(b2.getBikeid()).setValue(b2.getAvail());// why i set getavail here??
+                        dbref2.child(b2.getBikeid()).setValue(b2.getUsername());// why i set getavail here??
                     }
 
                     @Override
