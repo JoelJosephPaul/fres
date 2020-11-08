@@ -67,29 +67,19 @@ public class addbike extends AppCompatActivity {
                 bike.setAvail(0);
                 bike.setRented(0);
 
-                addbikereff.addListenerForSingleValueEvent(new ValueEventListener() {
+                addbikereff.child(bike.getBikeid()).setValue(bike).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        addbikereff.child(bike.getBikeid()).setValue(bike).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(addbike.this, "Add bike success", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                        .addOnFailureListener(new OnFailureListener() {
                             @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(addbike.this, "Add bike success", Toast.LENGTH_SHORT).show();
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(addbike.this, "add bike failed", Toast.LENGTH_SHORT).show();
                             }
-                        })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(addbike.this, "add bike failed", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                        addbike.this.finish();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                        });
+                addbike.this.finish();
             }
         });
     }

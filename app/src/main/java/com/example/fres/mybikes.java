@@ -48,25 +48,13 @@ public class mybikes extends AppCompatActivity {
 
                 Iterator<DataSnapshot> items = dataSnapshot.getChildren().iterator();
                 blist.clear();
-                //Toast.makeText(mybikes.this, "Total user  : "+ dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
-                //listofbikes.setText("Total user  : "+ dataSnapshot.getChildrenCount());
-                //listofbikes.setText(blist.size());
-                //listofbikes.setText(";;;;"+u+";;;;;");
-                //ong cou = dataSnapshot.getChildrenCount();
+
                 while (items.hasNext())
                 {
                     DataSnapshot item = items.next();
-                    //Toast.makeText(mybikes.this, item.child("username").toString(), Toast.LENGTH_LONG).show();
-                    //listofbikes.setText(listofbikes.getText().toString()+",,"+item.child("username").getValue().toString());
                     Bike b = new Bike();
                     if(item.child("username").getValue().toString().equals(u))
                     {
-                        //m++;
-                        //listofbikes.setText(listofbikes.getText().toString()+",,"+Integer.toString(m));
-                        //listofbikes.setText(item.child("username").getValue().toString());
-                        //listofbikes.setText(listofbikes.getText().toString()+item.child("bikeid").getValue().toString()+item.child("brand").getValue().toString()+item.child("model").getValue().toString()+item.child("cc").getValue().toString()+item.child("yop").getValue().toString()+item.child("extdet").getValue().toString());
-                        //
-                        //b = new Bike();
                         b.setBikeid(item.child("bikeid").getValue().toString());
                         b.setUsername(item.child("username").getValue().toString());
                         b.setBrand(item.child("brand").getValue().toString());
@@ -76,12 +64,7 @@ public class mybikes extends AppCompatActivity {
                         b.setExtdet(item.child("extdet").getValue().toString());
                         b.setAvail(Integer.parseInt(item.child("avail").getValue().toString()));
                         b.setRented(Integer.parseInt(item.child("rented").getValue().toString()));
-                        //Toast.makeText(mybikes.this, item.child("avail").getValue().toString(), Toast.LENGTH_SHORT).show();
                         blist.add(b);
-                        //listofbikes.setText(Integer.toString(blist.size()));
-                        //listofbikes.setText(blist.get(0).getBikeid());
-                        //kiranow    //   listofbikes.setText(blist.toString());
-                        //qqqq.setText(blist.toString());
                     }
 
                 }
@@ -105,13 +88,8 @@ public class mybikes extends AppCompatActivity {
         bikelistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //  kira now// listcont=0;
                 bname = blist.get(position).getBikeid();
                 tempbikereff = FirebaseDatabase.getInstance().getReference().child("Bikedata").child(bname);
-                //tempbikereff.setValue(tempbikereff);
-                //Toast.makeText(mybikes.this, tempbikereff.toString(), Toast.LENGTH_SHORT).show();
-                //int x = tempbikereff.child(bname)
-                // kiranow cont=1;
 
                 tempbikereff.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

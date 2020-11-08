@@ -86,12 +86,13 @@ public class rentabike extends AppCompatActivity {
                 bname = brlist.get(position).getBikeid();
                 temprentreff = FirebaseDatabase.getInstance().getReference().child("Bikedata").child(bname);
                 dbref = FirebaseDatabase.getInstance().getReference().child("incomingrequest");
-                dbref2= FirebaseDatabase.getInstance().getReference().child("pendingrequest");
+                dbref2= FirebaseDatabase.getInstance().getReference().child("pendingrequest").child(u);
                 memref = FirebaseDatabase.getInstance().getReference().child("Member");
                 temprentreff.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Bike b2 = new Bike();
+
                         memref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -114,7 +115,7 @@ public class rentabike extends AppCompatActivity {
                         b2.setAvail(Integer.parseInt(dataSnapshot.child("avail").getValue().toString()));
 
                         dbref.child(b2.getUsername()).child(b2.getBikeid()).child(u).setValue(m);
-                        dbref2.child(u).child(b2.getBikeid()).setValue(b2.getAvail());// why i set getavail here??
+                        dbref2.child(b2.getBikeid()).setValue(b2.getAvail());// why i set getavail here??
                     }
 
                     @Override

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,9 +24,10 @@ public class incomingrequests extends AppCompatActivity {
 
     TextView listincreq;
     ListView increqlistview;
-    DatabaseReference increqbikereff,pendbikereff,rentedreff,bikereff;
-    ArrayList<Member> incblist=new ArrayList<>();
-    String obname,bname,mname;
+    DatabaseReference increqbikereff, pendbikereff, rentedreff, bikereff;
+    ValueEventListener increqbikerefflistener;
+    ArrayList<Member> incblist = new ArrayList<>();
+    String obname, bname, mname;
     //Bike b = new Bike();
     //Member m = new Member();
 
@@ -37,59 +39,37 @@ public class incomingrequests extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         final String u = bundle.getString("username");
 
-        listincreq=findViewById(R.id.listincreq);
+        listincreq = findViewById(R.id.listincreq);
 
         increqlistview = findViewById(R.id.increqlistview);
 
-        increqbikereff = FirebaseDatabase.getInstance().getReference().child("incomingrequest");
+        increqbikereff = FirebaseDatabase.getInstance().getReference().child("incomingrequest").child(u);
         pendbikereff = FirebaseDatabase.getInstance().getReference().child("pendingrequest");
         rentedreff = FirebaseDatabase.getInstance().getReference().child("rentedbikes");
         bikereff = FirebaseDatabase.getInstance().getReference().child("Bikedata");
-        increqbikereff.addValueEventListener(new ValueEventListener() {
+        increqbikerefflistener = increqbikereff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(u))
-                {
-                    increqbikereff.child(u).addValueEventListener(new ValueEventListener() { //why different implementation from pending requests
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Iterator<DataSnapshot> items = dataSnapshot.getChildren().iterator();
-                            incblist.clear();
+                Iterator<DataSnapshot> items = dataSnapshot.getChildren().iterator();
+                incblist.clear();
 
-                            //b.setBikeid(dataSnapshot.getKey());
-                            while(items.hasNext())
-                            {
-                                Bike b = new Bike();
-                                DataSnapshot item=items.next();
-                                b.setBikeid(item.getKey());
-                                Iterator<DataSnapshot> items2 = item.getChildren().iterator();
-                                while (items2.hasNext())
-                                {
-                                    Member m = new Member();
-                                    DataSnapshot item2 = items2.next();
-                                    m.setPassword(b.getBikeid());
-                                    m.setName(item2.child("name").getValue().toString());
-                                    m.setUsername(item2.child("username").getValue().toString());
-                                    incblist.add(m);
-                                    //kiranow listincreq.setText(incblist.toString());
-                                }
-
-                                increqadapter incadapt = new increqadapter(incomingrequests.this,R.layout.increntviewlayout,incblist);
-                                increqlistview.setAdapter(incadapt);
-                                //kira now listincreq.setText(incblist.get(0).getPassword());
-
-
-
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                //b.setBikeid(dataSnapshot.getKey());
+                while (items.hasNext()) {
+                    Bike b = new Bike();
+                    DataSnapshot item = items.next();
+                    b.setBikeid(item.getKey());
+                    Iterator<DataSnapshot> items2 = item.getChildren().iterator();
+                    while (items2.hasNext()) {
+                        Member m = new Member();
+                        DataSnapshot item2 = items2.next();
+                        m.setPassword(b.getBikeid());
+                        m.setName(item2.child("name").getValue().toString());
+                        m.setUsername(item2.child("username").getValue().toString());
+                        incblist.add(m);
+                    }
                 }
+                increqadapter incadapt = new increqadapter(incomingrequests.this, R.layout.increntviewlayout, incblist);
+                increqlistview.setAdapter(incadapt);
             }
 
             @Override
@@ -105,23 +85,8 @@ public class incomingrequests extends AppCompatActivity {
                 bname = incblist.get(position).getPassword();//bikid
                 mname = incblist.get(position).getUsername();//username
 
-                /*
-                bikereff.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        obname=dataSnapshot.child(bname).child("username").getValue().toString();
-                        listincreq.setText(obname);
-                        Toast.makeText(incomingrequests.this, obname, Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-*/
-
                 pendbikereff.child(mname).child(bname).removeValue();
-                increqbikereff.child(u).child(bname).child(mname).removeValue();
+                increqbikereff.child(bname).child(mname).removeValue();
 
             }
         });
@@ -136,9 +101,9 @@ public class incomingrequests extends AppCompatActivity {
 
                 Toast.makeText(incomingrequests.this, obname, Toast.LENGTH_SHORT).show();
                 bikereff.child(bname).child("rented").setValue(1);
-                rentedreff.child(bname).setValue(mname);
+                rentedreff.child(mname).child(bname).setValue(u);
                 pendbikereff.child(mname).child(bname).removeValue();
-                increqbikereff.child(u).child(bname).child(mname).removeValue();
+                increqbikereff.child(bname).child(mname).removeValue();
 
                 return false;
             }
@@ -149,5 +114,6 @@ public class incomingrequests extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        increqbikereff.removeEventListener(increqbikerefflistener);
     }
 }
